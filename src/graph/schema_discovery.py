@@ -104,9 +104,7 @@ def discover(conn: GraphConnection) -> dict[str, Any]:
     return {
         "node_counts": count_nodes_by_label(conn),
         "relationship_counts": count_relationships_by_type(conn),
-        "node_properties": {
-            label: get_node_properties(conn, label) for label in get_labels(conn)
-        },
+        "node_properties": {label: get_node_properties(conn, label) for label in get_labels(conn)},
         "relationship_properties": {
             rel: get_relationship_properties(conn, rel) for rel in get_relationship_types(conn)
         },
