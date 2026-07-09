@@ -14,6 +14,7 @@ from graph.connection import get_connection
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     conn = get_connection()
     print(f"Connecting to {conn.uri} (database: {conn.database}) ...")
     try:

@@ -28,6 +28,7 @@ def print_result(rows: list[dict]) -> None:
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", type=int, help="run a single query by number (1-10)")
     parser.add_argument("--profile", action="store_true", help="show the PROFILE plan instead")

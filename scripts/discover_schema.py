@@ -17,6 +17,7 @@ SNAPSHOT_MARKER = "<!-- LIVE-SCHEMA-SNAPSHOT -->"
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     conn = get_connection()
     print(f"Introspecting {conn.uri} (database: {conn.database}) ...\n")
     try:
