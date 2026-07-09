@@ -2,8 +2,42 @@
 
 A hands-on learning project for exploring **graph databases** by building a movie knowledge graph, exposing it through an **MCP (Model Context Protocol) server**, and connecting an **LLM** so it can query and reason over the graph.
 
-> **Status: planning complete — implementation not yet started.**
+> **Status: milestones M0–M2 implemented** (environment, schema discovery, querying & traversal).
 > The full approved plan lives in [`PROJECT_PLAN.md`](./PROJECT_PLAN.md). Implementation proceeds milestone-by-milestone (M0–M8) as described there.
+
+## Getting Started (M0)
+
+Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
+
+```bash
+# 1. Install dependencies
+uv sync
+
+# 2. Configure the database connection (demo-server defaults work as-is)
+cp .env.example .env
+
+# 3. Verify connectivity — prints node/relationship counts and sample movies
+uv run python scripts/check_connection.py
+```
+
+> **Network note:** the demo server speaks Bolt-over-TLS on port **7687**. Some corporate/sandboxed networks only allow port 443; if the check fails with "Unable to retrieve routing information", run it from a network without that restriction. You can also explore the same database visually at the [Neo4j demo browser](https://demo.neo4jlabs.com:7473/browser/) (username & password: `recommendations`).
+
+## Exploring the Graph (M1–M2)
+
+```bash
+# Introspect the live schema: labels, relationship types, properties, counts
+uv run python scripts/discover_schema.py
+
+# Run the 10 progressive learning queries (lookup → traversal → shortest
+# path → recommendations → aggregation), each with an explanation
+uv run python scripts/run_queries.py
+
+# Run a single query by number, or inspect its execution plan
+uv run python scripts/run_queries.py --query 4
+uv run python scripts/run_queries.py --query 4 --profile
+```
+
+The discovered graph model is written up in [`docs/graph-model.md`](./docs/graph-model.md), and each learning query is explained in [`docs/queries.md`](./docs/queries.md).
 
 ## The Short Version
 
